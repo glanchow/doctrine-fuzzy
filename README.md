@@ -2,14 +2,34 @@ doctrine-fuzzy
 ==============
 
 Provides Doctrine DQL fuzzy functions :
-- **SOUNDEX**
-- **MATCH AGAINST**
 - **LEVENSHTEIN**
+- **MATCH AGAINST**
+- **SOUNDEX**
 
-symfony2 configuration
+Installation
+============
+
+### Installing with composer
+
+Edit composer.json
+
+```json
+    "require": {
+    …
+        "glanchow/doctrine-fuzzy": "*"
+    …
+    }
+```
+Then update
+
+```bash
+    php composer.phar update
+```
+
+Symfony2 configuration
 ======================
 
-app/config/config.yml
+Edit app/config/config.yml
 
 ```yml
 doctrine:
@@ -25,10 +45,33 @@ doctrine:
                         SOUNDEX: WOK\Doctrine\Query\SoundexFunction
 ```
 
-### Overview
+Usage
+=====
 
+```php
+   /**
+    * Suggest Geoname
+    */
+    public function suggestGeoname($q, $offset, $limit)
+    {
+        $query = $this->_em
+            ->createQueryBuilder('g')
+            ->select('g, LEVENSHTEIN(g.name, :q) AS d')
+            ->from($this->_entityName, 'g')
+            ->orderby('d', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('q', $q)
+            ->getQuery();
 
-### Add Levenshtein to MySQL
+        return $query->getResult();
+    }
+```
+
+Levenshtein
+===========
+
+If Levenshtein functions are not shipped with your database configuration
 
 Start your SQL client
 
