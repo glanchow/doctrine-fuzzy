@@ -1,0 +1,12 @@
+{
+    "name": "glanchow/doctrine-fuzzy",
+    "description": "Doctrine2 DQL fuzzy functions",
+    "keywords": ["doctrine", "levenshtein", "match", "soundex", "symfony"],
+    "license": "MIT",
+    "require": {
+        "doctrine/orm": ">=2.2.0"
+    },
+    "autoload": {
+        "psr-0": { "WOK": "lib/" }
+    }
+}
