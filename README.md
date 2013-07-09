@@ -1,11 +1,36 @@
 doctrine-fuzzy
 ==============
 
-1) Overview
+Provides Doctrine DQL fuzzy functions :
+- **SOUNDEX**
+- **MATCH AGAINST**
+- **LEVENSHTEIN**
 
-2) Add Levenshtein to MySQL
+symfony2 configuration
+======================
 
-Connect to you mysql server
+app/config/config.yml
+
+```yml
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                dql:
+                    numeric_functions:
+                        LEVENSHTEIN: WOK\Doctrine\Query\LevenshteinFunction
+                        LEVENSHTEIN_RATIO: WOK\Doctrine\Query\LevenshteinRatioFunction
+                    string_functions:
+                        MATCH_AGAINST: WOK\Doctrine\Query\MatchAgainstFunction
+                        SOUNDEX: WOK\Doctrine\Query\SoundexFunction
+```
+
+### Overview
+
+
+### Add Levenshtein to MySQL
+
+Start your SQL client
 
 ```bash
     mysql
@@ -18,8 +43,6 @@ Select the database on which you want to add the LEVENSHTEIN functions
 ```
 
 Add the functions
-
-### SQL
 
 ```sql
 DELIMITER ;;;
@@ -69,19 +92,3 @@ BEGIN
 END
 ;;;
 ```
-
-###
-
-config.yml
-
-```yml
-doctrine:
-    orm:
-        entity_managers:
-            default:
-                dql:
-                    numeric_functions:
-                        levenshtein: WOK\Doctrine\LevenshteinFunction
-                        levenshtein_ratio: WOK\Doctrine\LevenshteinRatioFunction
-
-```yml
