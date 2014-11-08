@@ -41,7 +41,7 @@ doctrine:
                         LEVENSHTEIN: WOK\Doctrine\Query\LevenshteinFunction
                         LEVENSHTEIN_RATIO: WOK\Doctrine\Query\LevenshteinRatioFunction
                     string_functions:
-                        MATCH_AGAINST: WOK\Doctrine\Query\MatchAgainstFunction
+                        MATCH: WOK\Doctrine\Query\MatchAgainstFunction
                         SOUNDEX: WOK\Doctrine\Query\SoundexFunction
 ```
 
